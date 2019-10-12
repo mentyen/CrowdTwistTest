@@ -1,5 +1,5 @@
 
-Feature: Placing and Validating order
+Feature: TC002 Validating place order functionality
 
 Background:
        Given I am on a home page

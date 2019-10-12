@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -212,6 +213,7 @@ public class CommonMethods extends BaseClass {
 	 * Method that will take  screenshot
 	 * 
 	 * @param 
+	 * @return  byte[]
 	 */
 
 	public static byte[] takeScreenshot() {
@@ -301,19 +303,28 @@ public class CommonMethods extends BaseClass {
 	 * @param
 	 */
 	
-	public static String getWeekDay() {
+	  public static String getWeekDay() {
 		
 		 Date now = new Date();
 
 	        SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE"); // the day of the week abbreviated
-	     
-	 
+	     	 
 	        simpleDateformat = new SimpleDateFormat("E"); // the day of the week spelled out completely
-	     
-		 
-		
+	      
 		return simpleDateformat.format(now);
 				
+	}
+	
+	  /**
+		 * Method that will return random email
+		 * 
+		 * @param
+		 */
+      public static String getEmail() {
+		
+		String generatedString=RandomStringUtils.randomAlphabetic(3);
+		
+		return (generatedString+"@gmail.com");
 	}
 	
 

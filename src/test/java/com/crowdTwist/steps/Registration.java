@@ -16,6 +16,7 @@ public class Registration extends CommonMethods {
 	public HomePage home;
 	public RegistrationPage registrationPage;
 	public MyAccountPage myAccountPage;
+	public String randomeEmail;
 
 	@Given("I am on a home page")
 	public void i_am_on_a_home_page() throws InterruptedException {
@@ -28,10 +29,12 @@ public class Registration extends CommonMethods {
 
 	}
 
-	@Given("I enter valid {string} address")
-	public void i_enter_valid_address(String email) throws InterruptedException {
+	@Given("I enter valid email address")
+	public void i_enter_valid_address() {
 
-		sendText(home.getEmailCreate(), email);
+		sendText(home.getEmailCreate(), getEmail());
+		
+		randomeEmail=home.getEmailCreate().getAttribute("value").toString();
 
 	}
 
@@ -42,8 +45,8 @@ public class Registration extends CommonMethods {
 
 	}
 
-	@When("I enter {string} and {string} and {string} and verify {string}")
-	public void i_enter_and_and_and(String firstName, String lastName, String password, String email)
+	@When("I enter {string} and {string} and {string} and verify email")
+	public void i_enter_and_and_and(String firstName, String lastName, String password)
 			throws InterruptedException {
 
 		registrationPage = new RegistrationPage();
@@ -54,10 +57,10 @@ public class Registration extends CommonMethods {
 
 		sendText(registrationPage.getCustomerlastName(), lastName);
 
-		if (registrationPage.getEmail().getAttribute("value").contains(email)) {
+		if (registrationPage.getEmail().getAttribute("value").contains(randomeEmail)) {
 			registrationPage.getEmail().click();
 		} else {
-			sendText(registrationPage.getEmail(), email);
+			sendText(registrationPage.getEmail(), getEmail());
 		}
 
 		sendText(registrationPage.getPassword(), password);
